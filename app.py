@@ -1,6 +1,4 @@
-
 from flask import Flask, render_template, request
-import pickle
 import numpy as np
 from keras.models import load_model
 from keras.preprocessing import image
@@ -8,8 +6,7 @@ import os
 
 app = Flask(__name__)
 
-# Load models
-symptom_model = pickle.load(open("symptom_model.pkl", "rb"))
+# Load only the CNN model
 cnn_model = load_model("models/cnn_model.h5")
 
 @app.route('/')
@@ -22,7 +19,10 @@ def symptom():
         symptoms = request.form['symptoms'].split(',')
         all_symptoms = ['fever', 'cough', 'headache', 'fatigue']
         input_vector = [1 if s.strip().lower() in symptoms else 0 for s in all_symptoms]
-        prediction = symptom_model.predict([input_vector])
+        
+        # Placeholder logic (since we removed the actual model)
+        prediction = ["Mild illness"]  # You can modify this based on your own logic
+
         return render_template('result.html', result=prediction[0])
     return render_template('symptom.html')
 
