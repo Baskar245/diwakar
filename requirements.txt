@@ -1,0 +1,7 @@
+Flask
+numpy
+keras
+tensorflow
+Pillow
+gunicorn
+pickle5
